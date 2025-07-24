@@ -1,6 +1,3 @@
-Yahan ek **complete `README.md` template** hai, jo **ChatBot** project ke liye ready paste & use hai — aap directly GitHub repo mein isay paste kar sakte hain. Frontend aur Backend dono ke liye sections diye hue hain:
-
----
 
 ```markdown
 # ChatBot 🚀
