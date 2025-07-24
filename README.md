@@ -42,28 +42,6 @@ ChatBot is a repository structured application with:
 
 ---
 
-## 📁 Project Structure
-
-```
-
-ChatBot/
-├── backend/        # API & AI logic
-│   ├── controllers/
-│   ├── routes/
-│   ├── services/
-│   ├── utils/
-│   ├── app.js or server.js
-│   └── package.json
-├── frontend/       # React app (chat UI)
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── App.jsx or App.js
-│   │   ├── index.js
-│   │   └── package.json
-└── README.md       # (You are here)
-
-````
 
 ---
 
