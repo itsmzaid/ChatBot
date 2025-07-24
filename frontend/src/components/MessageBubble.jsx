@@ -5,7 +5,7 @@ const MessageBubble = ({ role, text }) => {
 
   return (
     <div
-      className={`p-3 my-1 rounded-xl max-w-[70%] whitespace-pre-wrap prose prose-sm ${
+      className={`p-2 sm:p-3 my-1 rounded-xl max-w-[80%] text-sm sm:text-base whitespace-pre-wrap break-words ${
         isUser
           ? "bg-blue-500 text-white self-end ml-auto"
           : "bg-gray-100 text-black self-start mr-auto"

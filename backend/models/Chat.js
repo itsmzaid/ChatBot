@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const chatSchema = new mongoose.Schema(
   {
-    taskPrompt: String,
     files: [
       {
         name: String,

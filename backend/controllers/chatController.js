@@ -11,9 +11,8 @@ export const handleUserMessage = async (req, res) => {
   chat.messages.push({ role: "user", message });
 
   const fileContent = chat.files.map((f) => f.content).join("\n\n");
-  const task = chat.taskPrompt;
 
-  const botReply = await buildLangchainResponse(task, fileContent, message);
+  const botReply = await buildLangchainResponse(fileContent, message);
 
   chat.messages.push({ role: "bot", message: botReply });
   await chat.save();

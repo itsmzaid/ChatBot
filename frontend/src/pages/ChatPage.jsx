@@ -65,6 +65,7 @@ const ChatPage = () => {
 
     setIsBotTyping(false);
   };
+
   const handleReset = async () => {
     await resetChat({ chatId });
     localStorage.removeItem("chatId");
@@ -77,8 +78,8 @@ const ChatPage = () => {
 
   return (
     <MainLayout onReset={handleReset}>
-      <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col h-screen">
-        <h1 className="text-3xl font-bold mb-4 text-gray-800">
+      <div className="max-w-4xl mx-auto px-4 py-4 md:py-6 flex flex-col h-screen">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-gray-800 text-center md:text-left">
           {uploadStep ? "Upload Files to Start Chat" : "Chat with AI"}
         </h1>
 
@@ -87,16 +88,16 @@ const ChatPage = () => {
             <FileUploader onUpload={handleFileUpload} />
             {uploadedFiles.length > 0 && (
               <div className="mt-3">
-                <h3 className="text-sm font-semibold text-gray-700 mb-2">
+                <h3 className="text-xs sm:text-sm font-semibold text-gray-700 mb-2">
                   Uploaded Files:
                 </h3>
-                <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                <ul className="list-disc list-inside text-xs sm:text-sm text-gray-600 space-y-1">
                   {uploadedFiles.map((file, index) => (
                     <li key={index}>{file.name}</li>
                   ))}
                 </ul>
                 <button
-                  className="mt-4 bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition"
+                  className="mt-4 bg-green-600 text-white px-5 py-2 text-sm rounded hover:bg-green-700 transition w-full sm:w-auto"
                   onClick={handleStartChat}
                 >
                   Start Chat
@@ -106,7 +107,7 @@ const ChatPage = () => {
           </>
         ) : (
           <>
-            <div className="flex-1 mt-2 overflow-y-auto space-y-3 p-4 border rounded-md bg-gray-50 shadow-inner">
+            <div className="flex-1 mt-2 overflow-y-auto space-y-3 p-3 sm:p-4 border rounded-md bg-gray-50 shadow-inner">
               {messages.map((msg, idx) => (
                 <MessageBubble key={idx} role={msg.role} text={msg.message} />
               ))}

@@ -7,8 +7,8 @@ const FileUploader = ({ onUpload }) => {
   };
 
   return (
-    <div className="border p-6 rounded-md bg-white shadow-md">
-      <label className="block text-sm font-semibold mb-3 text-gray-700">
+    <div className="border p-4 sm:p-6 rounded-md bg-white shadow-md">
+      <label className="block text-sm font-semibold mb-2 text-gray-700">
         Upload Files (.pdf, .docx, .html, .txt)
       </label>
       <input

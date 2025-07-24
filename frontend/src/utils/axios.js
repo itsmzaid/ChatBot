@@ -21,7 +21,6 @@ export const axiosBaseQuery =
 
       return { data: result.data };
     } catch (err) {
-      toast.error(err.response?.data?.message || "An error occurred!");
       return {
         error: {
           status: err.response?.status,

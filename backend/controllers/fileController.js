@@ -4,7 +4,6 @@ import fs from "fs";
 
 export const handleFileUpload = async (req, res) => {
   try {
-    const { taskPrompt } = req.body;
     const files = req.files;
 
     if (!files || files.length === 0) {
@@ -37,7 +36,6 @@ export const handleFileUpload = async (req, res) => {
     }
 
     const chat = await Chat.create({
-      taskPrompt,
       files: fileData,
       messages: [],
     });

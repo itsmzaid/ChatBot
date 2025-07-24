@@ -14,7 +14,6 @@ const MessageSchema = new mongoose.Schema({
 
 const ChatSessionSchema = new mongoose.Schema({
   userId: String,
-  taskPrompt: String,
   files: [FileSchema],
   chat: [MessageSchema],
   createdAt: { type: Date, default: Date.now },
