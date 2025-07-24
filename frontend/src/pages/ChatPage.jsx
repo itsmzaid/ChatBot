@@ -13,7 +13,10 @@ import {
 const ChatPage = () => {
   const [chatId, setChatId] = useState(localStorage.getItem("chatId"));
   const [messages, setMessages] = useState([]);
-  const [uploadStep, setUploadStep] = useState(!chatId); // Show upload screen if no chatId
+  const [uploadStep, setUploadStep] = useState(!chatId);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [chatStarted, setChatStarted] = useState(false);
+  const [isBotTyping, setIsBotTyping] = useState(false);
 
   const [uploadFiles] = useUploadFilesMutation();
   const [sendMessage] = useSendMessageMutation();
@@ -24,74 +27,95 @@ const ChatPage = () => {
   });
 
   useEffect(() => {
-    if (chatId) {
-      localStorage.setItem("chatId", chatId);
-    }
+    if (chatId) localStorage.setItem("chatId", chatId);
   }, [chatId]);
 
   useEffect(() => {
-    if (historyData?.messages) {
-      setMessages(historyData.messages);
-    }
+    if (historyData?.messages) setMessages(historyData.messages);
   }, [historyData]);
 
   const handleFileUpload = async (files) => {
-    const formData = new FormData();
-    for (let file of files) {
-      formData.append("files", file);
-    }
+    const newFiles = Array.from(files);
+    setUploadedFiles((prev) => [...prev, ...newFiles]);
+  };
 
+  const handleStartChat = async () => {
+    const formData = new FormData();
+    uploadedFiles.forEach((file) => formData.append("files", file));
     const res = await uploadFiles(formData);
     if (res?.data?.chatId) {
       setChatId(res.data.chatId);
       setUploadStep(false);
+      setChatStarted(true);
     }
   };
 
   const handleSend = async (text) => {
     setMessages((prev) => [...prev, { role: "user", message: text }]);
+    setIsBotTyping(true);
+
     const res = await sendMessage({ chatId, message: text });
     if (res?.data?.reply) {
       setMessages((prev) => [
         ...prev,
         { role: "bot", message: res.data.reply },
       ]);
+      refetch();
     }
-  };
 
+    setIsBotTyping(false);
+  };
   const handleReset = async () => {
     await resetChat({ chatId });
     localStorage.removeItem("chatId");
     setChatId(null);
     setMessages([]);
     setUploadStep(true);
+    setUploadedFiles([]);
+    setChatStarted(false);
   };
 
   return (
-    <MainLayout>
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold mb-4">
+    <MainLayout onReset={handleReset}>
+      <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col h-screen">
+        <h1 className="text-3xl font-bold mb-4 text-gray-800">
           {uploadStep ? "Upload Files to Start Chat" : "Chat with AI"}
         </h1>
 
         {uploadStep ? (
-          <FileUploader onUpload={handleFileUpload} />
+          <>
+            <FileUploader onUpload={handleFileUpload} />
+            {uploadedFiles.length > 0 && (
+              <div className="mt-3">
+                <h3 className="text-sm font-semibold text-gray-700 mb-2">
+                  Uploaded Files:
+                </h3>
+                <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
+                  {uploadedFiles.map((file, index) => (
+                    <li key={index}>{file.name}</li>
+                  ))}
+                </ul>
+                <button
+                  className="mt-4 bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition"
+                  onClick={handleStartChat}
+                >
+                  Start Chat
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <>
-            <div className="flex flex-col mt-6 space-y-2 max-h-[50vh] overflow-y-auto p-4 border rounded-md bg-gray-50">
+            <div className="flex-1 mt-2 overflow-y-auto space-y-3 p-4 border rounded-md bg-gray-50 shadow-inner">
               {messages.map((msg, idx) => (
                 <MessageBubble key={idx} role={msg.role} text={msg.message} />
               ))}
+              {isBotTyping && <MessageBubble role="bot" text="..." />}
             </div>
 
-            <ChatInput onSend={handleSend} />
-
-            <button
-              onClick={handleReset}
-              className="mt-4 bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700"
-            >
-              End Chat
-            </button>
+            <div className="sticky bottom-0 bg-white pt-2">
+              <ChatInput onSend={handleSend} />
+            </div>
           </>
         )}
       </div>
