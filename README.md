@@ -158,3 +158,8 @@ Agar aap mujhe backend ya frontend ke `package.json` se kuch scripts, dependenci
 ```
 <img width="1909" height="817" alt="Screenshot 2025-07-25 005847" src="https://github.com/user-attachments/assets/63603bc9-7f2a-437d-8fa4-1483fcb461c2" />
 
+<img width="1917" height="816" alt="Screenshot 2025-07-25 010043" src="https://github.com/user-attachments/assets/53b3ce7a-a153-477a-8749-7de189de9365" />
+
+<img width="1911" height="814" alt="Screenshot 2025-07-25 005938" src="https://github.com/user-attachments/assets/0afbbcf9-cdbd-4dd9-9b05-d391f84f2e63" />
+
+<img width="1909" height="816" alt="Screenshot 2025-07-25 010027" src="https://github.com/user-attachments/assets/0cc1d2a2-4286-4837-8286-9ff377040d1f" />
