@@ -156,3 +156,5 @@ For questions or collaboration, reach out via:
 Agar aap mujhe backend ya frontend ke `package.json` se kuch scripts, dependencies ya custom endpoints bata dein, toh main aur bhi specific aur polished bana ke de sakta hoon — let me know!
 ::contentReference[oaicite:0]{index=0}
 ```
+<img width="1909" height="817" alt="Screenshot 2025-07-25 005847" src="https://github.com/user-attachments/assets/63603bc9-7f2a-437d-8fa4-1483fcb461c2" />
+
